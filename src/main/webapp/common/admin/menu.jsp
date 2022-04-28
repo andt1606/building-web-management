@@ -57,6 +57,13 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
+                <%--<li class="">
+                    <a href='<c:url value='/admin/staff-list'/>'>
+                        <i class="menu-icon fa fa-caret-right"></i>
+                        DS nhân viên
+                    </a>
+                    <b class="arrow"></b>
+                </li>--%>
             </ul>
         </li>
     </ul>

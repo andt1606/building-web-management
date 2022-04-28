@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@include file="/common/taglib.jsp"%>
 <c:url var="buildingListUrl" value="/admin/building-list"/>
-<c:url var="buildingSearchUrl" value="/admin/building-search"/>
+<%--<c:url var="buildingSearchUrl" value="/admin/building-search"/>--%>
 <c:url var="loadStaffAPI" value="/api/building"/>
 <c:url var="buildingAPI" value="/api/building"/>
 <c:url var="buildingEditUrl" value="/admin/building-edit"/>
@@ -66,7 +66,7 @@
                             <div class="widget-main">
 
                                 <!-- form cua spring, xài thì mấy cái bên dưới cũng ngon như input ấy path = name + value-->
-                                <form:form commandName="modelSearch" action="${buildingSearchUrl}" id="listForm" method="GET">
+                                <form:form commandName="modelSearch" action="${buildingListUrl}" id="listForm" method="GET">
 
                                     <div class="form-horizontal">
                                         <div class="form-group">
@@ -191,26 +191,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-4">
-                                                <label for="staffId">Chọn nhân viên phụ trách</label>
-
-                                                    <%--                                            <div class="dropdown">--%>
-                                                    <%--                                                <button id="staffId" name="staffId"--%>
-                                                    <%--                                                        class="btn btn-light dropdown-toggle" type="button"--%>
-                                                    <%--                                                        data-toggle="dropdown">-- Chọn nhân viên phụ trách ----%>
-                                                    <%--                                                    <span class="caret"></span></button>--%>
-                                                    <%--                                                <ul class="dropdown-menu">--%>
-                                                    <%--                                                    <li><a href="#">Anh Lâm chưa dạy spring security</a></li>--%>
-                                                    <%--                                                    <li><a href="#">Nên chưa làm phần này</a></li>--%>
-                                                    <%--                                                    <li><a href="#">JavaScript</a></li>--%>
-                                                    <%--                                                </ul>--%>
-                                                    <%--                                            </div>--%>
-                                                <select class="form-control" id="staffId">
-                                                    <option value="" >---Chọn nhân viên phụ trách---</option>
-                                                    <option value="nguyenvanA" >Anh Lâm chưa dạy spring security</option>
-                                                    <option value="nguyenvanB" >Anh Lâm kêu để đó/option>
-                                                </select>
-
+                                            <div class="col-sm-4 " style="margin-top: 25px">
+                                                <label for="staffId" >Nhân viên phụ trách</label>
+                                                <form:select path="staffId" style="margin-bottom: 15px">
+                                                    <form:option value="" label="---Chọn nhân viên phụ trách---"/>
+                                                    <form:options items="${staffs}"/>
+                                                </form:select>
                                             </div>
 
                                         </div>

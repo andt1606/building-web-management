@@ -52,6 +52,12 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 
     private void buildQueryWithJoin(BuildingSearchBuilder buildingSearchBuilder, StringBuilder joinQuery, StringBuilder whereQuery){
 
+        if(ValidateUtils.isValidProperty(buildingSearchBuilder.getStaffId())){
+            joinQuery.append(" INNER JOIN assignmentbuilding as ab on b.id = ab.buildingid" +
+                    " INNER JOIN users as u on ab.staffid = u.id");
+            whereQuery.append(" AND u.id = "+buildingSearchBuilder.getStaffId()+" ");
+        }
+
         if(ValidateUtils.isValid(buildingSearchBuilder.getRentAreaFrom()) || ValidateUtils.isValid(buildingSearchBuilder.getRentAreaTo()) ) {
 
             whereQuery.append(" and exists (select ra.value from rentarea as ra where b.id = ra.buildingid ");
@@ -72,7 +78,6 @@ public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
             whereQuery.append(sqlTypes);
             whereQuery.append(" ) ");
         }
-
 
     }
 

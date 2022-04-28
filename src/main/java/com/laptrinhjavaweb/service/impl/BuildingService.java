@@ -124,7 +124,7 @@ public class BuildingService implements IBuildingService {
                 .setRentPriceTo(buildingSearchRequest.getRentPriceTo())
                 .setManagerName(buildingSearchRequest.getManagerName())
                 .setManagerPhone(buildingSearchRequest.getManagerPhone())
-                .setUserAssignment(buildingSearchRequest.getUserAssignment())
+                .setStaffId(buildingSearchRequest.getStaffId())
                 .setBuildingType(buildingSearchRequest.getBuildingType())
                 .build();
         return result;

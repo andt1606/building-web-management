@@ -18,7 +18,7 @@ public class BuildingSearchBuilder {
 	private Integer rentPriceTo;
 	private String managerName;
 	private String managerPhone;
-	private Integer userAssignment;
+	private Long staffId;
 	private List<String> buildingType;
 
 	public String getName() {
@@ -133,12 +133,12 @@ public class BuildingSearchBuilder {
 		this.managerPhone = managerPhone;
 	}
 
-	public Integer getUserAssignment() {
-		return userAssignment;
+	public Long getStaffId() {
+		return staffId;
 	}
 
-	public void setUserAssignment(Integer userAssignment) {
-		this.userAssignment = userAssignment;
+	public void setStaffId(Long staffId) {
+		this.staffId = staffId;
 	}
 
 	public List<String> getBuildingType() {
@@ -164,7 +164,7 @@ public class BuildingSearchBuilder {
 		this.rentPriceTo = builder.rentPriceTo;
 		this.managerName = builder.managerName;
 		this.managerPhone = builder.managerPhone;
-		this.userAssignment = builder.userAssignment;
+		this.staffId = builder.staffId;
 		this.buildingType = builder.buildingType;
 	}
 
@@ -184,7 +184,7 @@ public class BuildingSearchBuilder {
 		private Integer rentPriceTo;
 		private String managerName;
 		private String managerPhone;
-		private Integer userAssignment;
+		private Long staffId;
 		private List<String> buildingType;
 
 		public Builder setName(String name) {
@@ -257,8 +257,8 @@ public class BuildingSearchBuilder {
 			return this;
 		}
 
-		public Builder setUserAssignment(Integer userAssignment) {
-			this.userAssignment = userAssignment;
+		public Builder setStaffId(Long staffId) {
+			this.staffId = staffId;
 			return this;
 		}
 
