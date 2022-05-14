@@ -45,13 +45,22 @@ public class CustomerAPI {
         return ResponseEntity.ok(customerDTO);
     }
 
-    @GetMapping("/customer/{customerId}/staffs")
+    /*@GetMapping("/customer/{customerId}/staffs")
     public ResponseDTO loadStaff(@PathVariable("customerId") long id){
         ResponseDTO result = new ResponseDTO();
         List<StaffResponseDTO> staffs = userService.getCustomerStaffs(id);
         result.setMessage("success");
         result.setData(staffs);
         return result;
+    }*/
+
+    @GetMapping("/customer/{customerId}/staffs")
+    public ResponseEntity<ResponseDTO> loadStaff(@PathVariable("customerId") long id){
+        ResponseDTO result = new ResponseDTO();
+        List<StaffResponseDTO> staffs = userService.getCustomerStaffs(id);
+        result.setMessage("success");
+        result.setData(staffs);
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/customer-assignment")
@@ -68,10 +77,16 @@ public class CustomerAPI {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/customer")
+    /*@DeleteMapping("/customer")
     public void deleteCustomers(@RequestBody List<Long> ids) {
         if (SecurityUtils.getAuthorities().contains(SystemConstant.ADMIN_ROLE)) {
             customerService.deleteCustomer(ids);
         }
+    }*/
+
+    @DeleteMapping("/customer")
+    public ResponseEntity<Void> deleteCustomers(@RequestBody List<Long> ids) {
+        customerService.deleteCustomer(ids);
+        return ResponseEntity.noContent().build();
     }
 }
