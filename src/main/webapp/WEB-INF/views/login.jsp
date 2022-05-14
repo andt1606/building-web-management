@@ -30,7 +30,7 @@
 					</c:if>
 					<form action="j_spring_security_check" id="formLogin" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" id="userName" name="j_username" placeholder="Tên đăng nhập">
+							<input type="text" class="form-control" id="userName" name="j_username" placeholder="Tên đăng nhập123123123123123123">
 						</div>
 
 						<div class="form-group">
