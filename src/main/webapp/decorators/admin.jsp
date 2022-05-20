@@ -18,6 +18,8 @@
 	<%--sweetalert--%>
 	<script type='text/javascript' src="assets/sweetalert2/sweetalert2.min.js"></script>
 	<link rel="stylesheet" href="assets/sweetalert2/sweetalert2.min.css">
+	<link rel="stylesheet" href="assets/customer-list.css">
+	<link rel="stylesheet" href="assets/password.css">
 </head>
 <body class="no-skin">
 	<!-- header -->

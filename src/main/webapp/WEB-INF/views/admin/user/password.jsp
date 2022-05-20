@@ -34,42 +34,43 @@
                                 ${messageResponse}
                         </div>
                     </c:if>
+                    <div class="change-password-title"> Đổi mật khẩu</div>
                     <div id="profile">
                         <form:form id="formChangePassword" class="form-horizontal" name="formChangePassword">
-                            <div class="space-4"></div>
+
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right">
-                                    <%--<spring:message code="label.password.old"/>--%>
-                                        Mật khẩu cũ
-                                </label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="oldPassword" name="oldPassword"/>
-                                </div>
+                                    <div class="col-sm-12 input-password-container">
+                                        <div class="col-sm-3 text-right align-middle input_password-text">
+                                            <%--<spring:message code="label.password.old"/>--%>
+                                        Mật khẩu cũ:
+                                        </div>
+                                        <div class="col-sm-4">
+                                        <input type="password" class="form-control input_password" id="oldPassword" name="oldPassword" placeholder="--Nhập mật khẩu cũ--"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 input-password-container">
+                                            <%--<spring:message code="label.password.new"/>--%>
+                                                <div class="col-sm-3  text-right align-middle input_password-text">
+                                        Mật khẩu mới:
+                                                </div>
+                                        <div class="col-sm-4">
+                                            <input type="password" class="form-control input_password" id="newPassword" name="newPassword" placeholder="--Nhập mật khẩu mới--"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 input-password-container">
+                                            <%--<spring:message code="label.password.repeat"/>--%>
+                                        <div class="col-sm-3 text-right align-middle input_password-text">
+                                            Xác nhận mật khẩu:
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="password" class="form-control input_password" id="confirmPassword" name="confirmPassword" placeholder="--Xác nhận mật khẩu mới--"/>
+                                        </div>
+                                    </div>
                             </div>
-                            <div class="space-4"></div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right">
-                                    <%--<spring:message code="label.password.new"/>--%>
-                                        Mật khẩu mới
-                                </label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="newPassword" name="newPassword"/>
-                                </div>
-                            </div>
-                            <div class="space-4"></div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right">
-                                    <%--<spring:message code="label.password.repeat"/>--%>
-                                        Nhập lại mật khẩu mới
-                                </label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
-                                </div>
-                            </div>
+
                             <!--Btn-->
-                            <div class="col-sm-12">
-                                <label class="col-sm-3 control-label no-padding-right message-info"></label>
-                                <input type="button" class="btn btn-white btn-warning btn-bold" value="Đổi mật khẩu" id="btnChangePassword"/>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary" id="btnChangePassword">Đổi mật khẩu</button>
                             </div>
                             <!--Btn-->
                             <input type="hidden" value="${model.id}" id="userId"/>
