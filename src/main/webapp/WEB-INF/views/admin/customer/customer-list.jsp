@@ -19,6 +19,7 @@
 </head>
 <body>
 
+
 <div class="main-content">
 
     <div class="main-content-inner">
@@ -71,7 +72,7 @@
                                             </div>
 
                                             <div class="col-sm-3 input-container">
-                                                    <form:input path="email" cssClass="form-control input" placeholder="--Nhân viên phụ trách--"/>
+                                                    <form:input path="email" cssClass="form-control input" placeholder="--Email--"/>
                                             </div>
 
                                             <div class="col-sm-2  input-container">
@@ -82,8 +83,8 @@
                                                 </form:select>
                                             </div>
 
-                                            <div class="form-group col-sm-1">
-                                                    <button type="button" class="btn btn-primary"  id="btnSearchCustomer" style="width: 100%;height: 100%">Tìm kiếm</button>
+                                            <div class="form-group col-sm-1 ">
+                                                    <button type="button" class="btn btn-primary"  id="btnSearchCustomer" style="width: 100%;height: 100%;border-radius: 3px">Tìm kiếm</button>
                                             </div>
                                         </div>
 
@@ -103,12 +104,12 @@
                         </div>
                         <div class="pull-right" style="padding-right: 12px;padding-top: 2vh">
                             <a href="/admin/customer-edit">
-                                <button class="btn btn-primary" data-toggle="tooltip" title="Thêm người dùng">
+                                <button class="btn btn-primary" style="border-radius: 3px" data-toggle="tooltip" title="Thêm người dùng">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     Thêm
                                 </button>
                             </a>
-                            <button class="btn btn-danger"
+                            <button class="btn btn-danger " style="border-radius: 3px;"
                                     data-toggle="tooltip" title="Xóa người dùng" id="btnDeleteCustomer">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                 Xóa
@@ -120,73 +121,58 @@
                 <br>
                 <div class="row">
                     <div class="col-xs-12">
-                        <c:forEach var="item" items="${customers}">
-                            <div class="customer-info">
-                                <div class="row" style="height: 100%">
-                                    <div class="col-xs-1 center customer-item" style="width: 3%;margin-left: 1vw">
-                                        <label class="pos-rel" style="top:50%">
+
+                        <table id="customerList" class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center">Ảnh </th>
+                                <th class="text-center">Thông tin khách hàng</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <c:forEach var="item" items="${customers}">
+                                <tr>
+                                    <td style="text-align: center;vertical-align: middle;">
+                                        <label class="pos-rel" >
                                             <input type="checkbox" class="ace" value="${item.id}" id="checkboxListBuilding_${item.id}"/>
                                             <span class="lbl"></span>
                                         </label>
-                                    </div>
-                                    <div class="col-xs-2 customer-item" onclick="location.href='${customerEditUrl}-${item.id}';">
-                                        <img src="/adu.png"height="100%" width="100%"/>
-                                    </div>
-                                    <div class="col-xs-auto customer-item" onclick="location.href='${customerEditUrl}-${item.id}';">
-                                        <div class="customer-name">
-                                                ${item.fullname}
+                                    </td>
+
+                                    <td style="text-align: center;vertical-align: middle; ">
+                                            <img  style="border: 1px solid black;text-align: center;vertical-align: middle;" src="https://bootdey.com/img/Content/avatar/avatar7.png" height="120px" width="120px"/>
+
+                                    </td>
+                                    <td>
+                                        <div class="col-xs-auto customer-item" onclick="location.href='${customerEditUrl}-${item.id}';">
+                                            <div class="customer-info-title" >
+                                                Họ và tên: <span style="color: blue;font-weight: bold;font-size: 20px"> ${item.fullname}</span>
+                                            </div>
+                                            <div class="customer-info-title">
+                                                    Số điện thoại: ${item.phone}
+                                            </div>
+                                            <div class="customer-info-title">
+                                                    Email: ${item.email}
+
+                                            </div>
+                                            <div class="customer-info-title">
+                                                    Người phụ trách: ${item.managerAssignedName}
+                                            </div>
+                                            <div class="customer-info-title">
+                                                    Đã thuê:
+                                            </div>
                                         </div>
-                                                    <div class="customer-info-title">
-                                                        <div class="col-xs-1">
-                                                            Số điện thoại:
-                                                        </div>
-                                                        <div class="col-xs-auto">
-                                                            ${item.phone}
-                                                        </div>
-                                                    </div>
-                                                    <div class="customer-info-title">
-                                                        <div class="col-xs-1">
-                                                            Email:
-                                                        </div>
-                                                        <div class="col-xs-auto">
-                                                                ${item.email}
-                                                        </div>
+                                    </td>
 
-                                                    </div>
-                                                    <div class="customer-info-title">
-                                                        <div class="col-xs-1">
-                                                            Người phụ trách:
-                                                        </div>
-                                                        <div class="col-xs-auto">
-                                                                ${item.managerAssignedName}
-                                                        </div>
-                                                    </div>
-                                                    <div class="customer-info-title">
-                                                        <div class="col-xs-1">
-                                                            Đã thuê:
-                                                        </div>
-                                                        <div class="col-xs-auto">
-                                                                ${item.demand}
-                                                        </div>
-                                                    </div>
-                                                    <div class="customer-info-title">
-                                                        <button class="btn btn-xs btn-info" data-toggle="tooltip"
-                                                                title="Giao khách hàng" onclick="assignmentCustomer(${item.id})">
-                                                            <i class="fa fa-bars"></i>
-                                                        </button>
+                                </tr>
+                            </c:forEach>
 
 
-                                                        <a href="${customerEditUrl}-${item.id}">
-                                                            <button class="btn btn-xs btn-info" data-toggle="tooltip"
-                                                                    title="Chỉnh khách hàng" >
-                                                                <i class="fa fa-pencil"></i>
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div><!-- /.page-content -->
@@ -320,7 +306,7 @@
     $('#btnDeleteCustomer').click(function (e) {
         e.preventDefault();
         var data = {};
-        var customerIds = $('#customerList').find('tbody input[type=checkbox]:checked').map(function () {
+        var customerIds = $('#customerList').find(' input[type=checkbox]:checked').map(function () {
             return $(this).val();
         }).get();
         data['customerIds'] = customerIds;

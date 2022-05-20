@@ -10,7 +10,6 @@
 <body>
 	<div class="container">
 		<div style="margin-top: 50px" >
-			<h1 class="form-heading">Login Form</h1>
 			<div class="login-form" >
 				<div class="main-div">
 					<c:if test="${param.incorrectAccount != null}">
@@ -30,7 +29,7 @@
 					</c:if>
 					<form action="j_spring_security_check" id="formLogin" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" id="userName" name="j_username" placeholder="Tên đăng nhập123123123123123123">
+							<input type="text" class="form-control" id="userName" name="j_username" placeholder="Tên đăng nhập">
 						</div>
 
 						<div class="form-group">
