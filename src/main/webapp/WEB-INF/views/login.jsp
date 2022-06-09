@@ -10,6 +10,7 @@
 <body>
 	<div class="container">
 		<div style="margin-top: 50px" >
+<%--			<h1 class="form-heading">Login Form</h1>--%>
 			<div class="login-form" >
 				<div class="main-div">
 					<c:if test="${param.incorrectAccount != null}">

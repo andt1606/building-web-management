@@ -16,9 +16,9 @@ public class TransactionEntity extends BaseEntity{
     @JoinColumn(name = "customerid", nullable = false)
     private CustomerEntity customer;
 
-/*    @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "staffid", nullable = false)
-    private UserEntity user;*/
+    private UserEntity user;
 
 
     public String getCode() {
@@ -45,6 +45,11 @@ public class TransactionEntity extends BaseEntity{
         this.customer = customer;
     }
 
+    public UserEntity getUser() {
+        return user;
+    }
 
-
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }

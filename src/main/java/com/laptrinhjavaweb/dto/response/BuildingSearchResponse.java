@@ -10,12 +10,15 @@ public class BuildingSearchResponse extends AbstractDTO<BuildingSearchResponse>{
     private String address;
     private String managerName;
     private String managerPhone;
-    private Integer floorArea;
+    /*private Integer floorArea;
     private Integer rentPrice;
     private Integer serviceFee;
-    private Integer brokerageFee;
+    private Integer brokerageFee;*/
 
-
+    private String floorArea;
+    private String rentPrice;
+    private String serviceFee;
+    private String brokerageFee;
 
     public String getName() {
         return name;
@@ -49,35 +52,35 @@ public class BuildingSearchResponse extends AbstractDTO<BuildingSearchResponse>{
         this.managerPhone = managerPhone;
     }
 
-    public Integer getFloorArea() {
+    public String getFloorArea() {
         return floorArea;
     }
 
-    public void setFloorArea(Integer floorArea) {
+    public void setFloorArea(String floorArea) {
         this.floorArea = floorArea;
     }
 
-    public Integer getRentPrice() {
+    public String getRentPrice() {
         return rentPrice;
     }
 
-    public void setRentPrice(Integer rentPrice) {
+    public void setRentPrice(String rentPrice) {
         this.rentPrice = rentPrice;
     }
 
-    public Integer getServiceFee() {
+    public String getServiceFee() {
         return serviceFee;
     }
 
-    public void setServiceFee(Integer serviceFee) {
+    public void setServiceFee(String serviceFee) {
         this.serviceFee = serviceFee;
     }
 
-    public Integer getBrokerageFee() {
+    public String getBrokerageFee() {
         return brokerageFee;
     }
 
-    public void setBrokerageFee(Integer brokerageFee) {
+    public void setBrokerageFee(String brokerageFee) {
         this.brokerageFee = brokerageFee;
     }
 }

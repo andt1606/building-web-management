@@ -54,8 +54,9 @@ public class BuildingService implements IBuildingService {
                 BuildingEntity buildingFound = Optional.ofNullable(buildingRepository.findOne(buildingId))
                         .orElseThrow(() -> new NotFoundException("Building not found"));
 
-                buildingEntity.setCreatedBy(buildingFound.getCreatedBy());
-                buildingEntity.setCreatedDate(buildingFound.getCreatedDate());
+                /*buildingEntity.setCreatedBy(buildingFound.getCreatedBy());
+                buildingEntity.setCreatedDate(buildingFound.getCreatedDate());*/
+                buildingEntity.setUsers(buildingFound.getUsers());
 
                 rentareaRepository.deleteByBuildingId(buildingId);
             }

@@ -16,6 +16,16 @@ public class CustomerResponse {
     private String createdDate;
     private String status;
 
+    private String thumbnail;
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
     public Long getId() {
         return id;
     }

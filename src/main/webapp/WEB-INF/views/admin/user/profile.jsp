@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
 <c:url var="formUrl" value="/api/user"/>
+
 <html>
 <head>
     <title>Chỉnh sửa người dùng</title>
@@ -39,7 +40,7 @@
                         <div class="space-4"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">
-                                <%--<spring:message code="label.username"/>--%>
+<%--                                <spring:message code="label.username"/>--%>
                                     Tên đăng nhập
                             </label>
                             <div class="col-sm-9">
@@ -49,7 +50,7 @@
                         <div class="space-4"></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">
-                                <%--<spring:message code="label.fullname"/>--%>
+<%--                                <spring:message code="label.fullname"/>--%>
                                     Tên đầy đủ
                             </label>
                             <div class="col-sm-9">
@@ -88,11 +89,11 @@
                 contentType: 'application/json',
                 data: JSON.stringify(data),
                 success: function (res) {
-                    window.location.href = "<c:url value='/admin/profile/"+res.userName+"?message=update_success'/>";
+                    window.location.href = "<c:url value='/admin/profile-"+res.userName+"?message=update_success'/>";
                 },
                 error: function (res) {
                     console.log(res);
-                    window.location.href = "<c:url value='/admin/profile/"+username+"?message=error_system'/>";
+                    window.location.href = "<c:url value='/admin/profile-"+username+"?message=error_system'/>";
                 }
             });
         }

@@ -13,12 +13,14 @@
 <c:url var="loadStaffAPICustomer" value="/api/customer"/>
 <c:url var="CustomerAssignmentAPI" value="/api/customer-assignment"/>
 <c:url var="customerAPI" value="/api/customer"/>
+
+<%@ page import="com.laptrinhjavaweb.security.utils.SecurityUtils" %>
+
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-
 
 <div class="main-content">
 
@@ -34,14 +36,25 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="#">Trang chủ</a>
+                    <a href="#">Home</a>
                 </li>
-                <li class="active">Quản lý khách hàng</li>
+                <li class="active">Dashboard</li>
             </ul><!-- /.breadcrumb -->
 
         </div>
 
         <div class="page-content">
+
+            <div class="page-header">
+                <h1>
+                    Dashboard
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        overview &amp; stats
+                    </small>
+                </h1>
+            </div><!-- /.page-header -->
+
 
             <div class="row">
                 <div class="col-sm-12">
@@ -49,7 +62,7 @@
 
                         <div class="widget-header">
 
-                            <h4 class="widget-title search-title">Tìm kiếm khách hàng</h4>
+                            <h4 class="widget-title">Tìm kiếm</h4>
 
                             <div class="widget-toolbar">
                                 <a href="#" data-action="collapse">
@@ -62,32 +75,44 @@
                             <div class="widget-main">
                                 <form:form commandName="modelSearch" action="${customerListUrl}" id="listForm" method="GET">
                                     <div class="form-horizontal">
-                                        <div class="form-group search-form">
-                                            <div class="col-sm-3 input-container">
-                                                    <form:input path="fullname" cssClass="form-control input" placeholder="--Tên khách hàng--"/>
+                                        <div class="form-group">
+                                            <div class="col-sm-4">
+                                                <div>
+                                                    <label for="fullname">Tên khách hàng</label>
+                                                    <form:input path="fullname" cssClass="form-control"/>
+                                                </div>
                                             </div>
 
-                                            <div class="col-sm-3 input-container">
-                                                    <form:input path="phone" cssClass="form-control input" placeholder="--Di động--"/>
+                                            <div class="col-sm-4">
+                                                <div>
+                                                    <label for="phone">Di động</label>
+                                                    <form:input path="phone" cssClass="form-control"/>
+                                                </div>
                                             </div>
 
-                                            <div class="col-sm-3 input-container">
-                                                    <form:input path="email" cssClass="form-control input" placeholder="--Email--"/>
+                                            <div class="col-sm-4">
+                                                <div>
+                                                    <label for="email">Email</label>
+                                                    <form:input path="email" cssClass="form-control"/>
+                                                </div>
                                             </div>
+                                        </div>
 
-                                            <div class="col-sm-2  input-container">
+                                            <div class="col-sm-6" >
+                                                <label for="staffId" style="margin-bottom: 15px">Nhân viên phụ trách</label>
 
-                                                <form:select path="staffId" style="margin-bottom: 15px" cssClass="select-container">
+                                                <form:select path="staffId" style="margin-bottom: 15px">
                                                     <form:option value="" label="---Chọn nhân viên phụ trách---"/>
                                                     <form:options items="${staffs}"/>
                                                 </form:select>
                                             </div>
 
-                                            <div class="form-group col-sm-1 ">
-                                                    <button type="button" class="btn btn-primary"  id="btnSearchCustomer" style="width: 100%;height: 100%;border-radius: 3px">Tìm kiếm</button>
+
+                                        <div class="form-group">
+                                            <div class = "col-sm-12">
+                                                <button type="button" class="btn btn-success"  id="btnSearchCustomer">Tìm kiếm</button>
                                             </div>
                                         </div>
-
                                     </div>
 
                                 </form:form>
@@ -97,85 +122,142 @@
 
                 </div><!-- /.row -->
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="pull-left customer-title">
-                            Danh sách khách hàng
-                        </div>
-                        <div class="pull-right" style="padding-right: 12px;padding-top: 2vh">
-                            <a href="/admin/customer-edit">
-                                <button class="btn btn-primary" style="border-radius: 3px" data-toggle="tooltip" title="Thêm người dùng">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    Thêm
-                                </button>
-                            </a>
-                            <button class="btn btn-danger " style="border-radius: 3px;"
-                                    data-toggle="tooltip" title="Xóa người dùng" id="btnDeleteCustomer">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                Xóa
-                            </button>
-                        </div>
-                    </div>
-                </div>
+
+
                 <!-- button-add-delete -->
                 <br>
-                <div class="row">
-                    <div class="col-xs-12">
 
-                        <table id="customerList" class="table table-striped table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th class="text-center">Ảnh </th>
-                                <th class="text-center">Thông tin khách hàng</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <c:forEach var="item" items="${customers}">
-                                <tr>
-                                    <td style="text-align: center;vertical-align: middle;">
-                                        <label class="pos-rel" >
-                                            <input type="checkbox" class="ace" value="${item.id}" id="checkboxListBuilding_${item.id}"/>
-                                            <span class="lbl"></span>
-                                        </label>
-                                    </td>
-
-                                    <td style="text-align: center;vertical-align: middle; ">
-                                            <img  style="border: 1px solid black;text-align: center;vertical-align: middle;" src="https://bootdey.com/img/Content/avatar/avatar7.png" height="120px" width="120px"/>
-
-                                    </td>
-                                    <td>
-                                        <div class="col-xs-auto customer-item" onclick="location.href='${customerEditUrl}-${item.id}';">
-                                            <div class="customer-info-title" >
-                                                Họ và tên: <span style="color: blue;font-weight: bold;font-size: 20px"> ${item.fullname}</span>
-                                            </div>
-                                            <div class="customer-info-title">
-                                                    Số điện thoại: ${item.phone}
-                                            </div>
-                                            <div class="customer-info-title">
-                                                    Email: ${item.email}
-
-                                            </div>
-                                            <div class="customer-info-title">
-                                                    Người phụ trách: ${item.managerAssignedName}
-                                            </div>
-                                            <div class="customer-info-title">
-                                                    Đã thuê:
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                </tr>
-                            </c:forEach>
-
-
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div><!-- /.page-content -->
+            <br>
+
+            <c:set var = "roleList" scope = "session" value = "<%=SecurityUtils.getPrincipal().getAuthorities()%>"/>
+
+
+            <c:forEach var="role" items="${roleList}">
+                <c:if test = "${role == 'ROLE_ADMIN'}">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="pull-right">
+                                <a href="/admin/customer-edit">
+                                    <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm người dùng">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                    </button>
+                                </a>
+                                <button class="btn btn-white btn-warning btn-bold"
+                                        data-toggle="tooltip" title="Xóa người dùng" id="btnDeleteCustomer">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+            </c:forEach>
+
+
+            <br>
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="customerList" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tên </th>
+                            <th>Ảnh </th>
+                            <th>Nhân viên quản lý</th>
+                            <th>Di động</th>
+                            <th>Email</th>
+                            <th>Nhu cầu</th>
+                            <th>Người nhập</th>
+                            <th>Ngày nhập</th>
+                            <th>Tình trạng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <c:forEach var="item" items="${customers}">
+                            <tr>
+                                <td class="center " style="text-align: center;vertical-align: middle; ">
+                                    <label class="pos-rel" >
+                                        <input type="checkbox" class="ace" value="${item.id}" id="checkboxListBuilding_${item.id}"/>
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+
+                                <td style="text-align: center;vertical-align: middle; ">
+                                        ${item.fullname}
+                                </td>
+                                <td style="width: 80px;height: 80px">
+                                    <div >
+                                        <img class="img-responsive" src="${pageContext.request.contextPath}${item.thumbnail}" >
+                                    </div>
+                                </td>
+                                <td style="text-align: center;vertical-align: middle; ">${item.managerAssignedName}</td>
+                                <td style="text-align: center;vertical-align: middle; ">${item.phone}</td>
+                                <td style="text-align: center;vertical-align: middle; ">${item.email}</td>
+
+                                <td style="text-align: center;vertical-align: middle; ">
+                                        ${item.demand}
+                                </td>
+
+                                <td style="text-align: center;vertical-align: middle; ">
+                                        ${item.createdBy}
+                                </td>
+
+                                <td style="text-align: center;vertical-align: middle; ">
+                                        ${item.createdDate}
+                                </td>
+
+                                <td style="text-align: center;vertical-align: middle; ">
+                                    Đang xử lý
+                                    <%--<c:set var = "role" scope = "session" value = "<%=SecurityUtils.getPrincipal().getFullName()%>"/>
+                                    <c:if test = "${role == 'admin'}">
+                                        <p>tao la admin duoc in ra boi cif<p>
+                                    </c:if>
+
+
+                                    <c:choose>
+
+                                            <c:when test = "${role == 'admin'}">
+                                                <p>tao la admin duoc in ra boi c choose<p>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                tao khong phai admin
+                                            </c:otherwise>
+                                        </c:choose>--%>
+                                </td>
+
+                                <td style="text-align: center;vertical-align: middle; ">
+
+
+
+                                    <c:forEach var="role" items="${roleList}">
+                                        <c:if test = "${role == 'ROLE_ADMIN'}">
+                                            <button class="btn btn-xs btn-info" data-toggle="tooltip"
+                                                    title="Giao khách hàng" onclick="assignmentCustomer(${item.id})">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                        </c:if>
+                                    </c:forEach>
+
+
+                                    <a href="${customerEditUrl}-${item.id}">
+                                        <button class="btn btn-xs btn-info" data-toggle="tooltip"
+                                                title="Chỉnh khách hàng" >
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div><!-- /.main-content -->
 </div>
@@ -306,7 +388,7 @@
     $('#btnDeleteCustomer').click(function (e) {
         e.preventDefault();
         var data = {};
-        var customerIds = $('#customerList').find(' input[type=checkbox]:checked').map(function () {
+        var customerIds = $('#customerList').find('tbody input[type=checkbox]:checked').map(function () {
             return $(this).val();
         }).get();
         data['customerIds'] = customerIds;

@@ -8,6 +8,16 @@ public class CustomerDTO extends AbstractDTO<CustomerDTO>{
     private String demand;
     private String note;
 
+    private String thumbnail;
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
     public String getFullname() {
         return fullname;
     }

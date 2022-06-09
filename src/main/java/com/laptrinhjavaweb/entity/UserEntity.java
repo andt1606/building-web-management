@@ -25,8 +25,8 @@ public class UserEntity extends BaseEntity {
     @Column(name = "email", unique = true)
     private String email;
 
-/*    @OneToMany(mappedBy = "user")
-    private List<TransactionEntity> transactions = new ArrayList<>();*/
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<TransactionEntity> transactions = new ArrayList<>();
 
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<BuildingEntity> buildings = new ArrayList<>();
@@ -104,5 +104,13 @@ public class UserEntity extends BaseEntity {
 
     public void setCustomers(List<CustomerEntity> customers) {
         this.customers = customers;
+    }
+
+    public List<TransactionEntity> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<TransactionEntity> transactions) {
+        this.transactions = transactions;
     }
 }

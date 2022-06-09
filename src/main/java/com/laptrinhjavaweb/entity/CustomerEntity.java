@@ -26,6 +26,9 @@ public class CustomerEntity extends BaseEntity{
     @Column(name = "note")
     private String note;
 
+    @Column(name = "thumbnail")
+    private String thumbnail;
+
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<TransactionEntity> transactions = new ArrayList<>();
 
@@ -97,5 +100,13 @@ public class CustomerEntity extends BaseEntity{
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

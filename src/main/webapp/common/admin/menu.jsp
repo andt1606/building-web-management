@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+
+<%@ page import="com.laptrinhjavaweb.security.utils.SecurityUtils" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
     <script type="text/javascript">
@@ -42,6 +45,8 @@
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
+
+
                 <li class="">
                     <a href='<c:url value='/admin/building-list'/>'>
                         <i class="menu-icon fa fa-caret-right"></i>
@@ -57,13 +62,23 @@
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <%--<li class="">
-                    <a href='<c:url value='/admin/staff-list'/>'>
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        DS nhân viên
-                    </a>
-                    <b class="arrow"></b>
-                </li>--%>
+
+                <c:set var = "roleList" scope = "session" value = "<%=SecurityUtils.getPrincipal().getAuthorities()%>"/>
+
+
+                <c:forEach var="role" items="${roleList}">
+                    <c:if test = "${role == 'ROLE_ADMIN'}">
+                        <li class="">
+                            <a href='<c:url value='/admin/user-list'/>'>
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                DS nhân viên
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </c:if>
+                </c:forEach>
+
+
             </ul>
         </li>
     </ul>

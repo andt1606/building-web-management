@@ -5,6 +5,8 @@ public class TransactionDTO extends AbstractDTO<TransactionDTO>{
     private String note;
     private Long customerId;
 
+    private Long staffId;
+
     public String getCode() {
         return code;
     }
@@ -27,5 +29,13 @@ public class TransactionDTO extends AbstractDTO<TransactionDTO>{
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Long getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
     }
 }

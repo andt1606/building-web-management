@@ -68,20 +68,60 @@ public class CustomerService implements ICustomerService {
     @Override
     @Transactional
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-        Long customerId = customerDTO.getId();
-        if(Objects.nonNull(customerDTO)){
+//        Long customerId = customerDTO.getId();
+        /*if(Objects.nonNull(customerDTO)){
             CustomerEntity customerEntity = customerConverter.convertToEntity(customerDTO);
-            if(customerId != null){
+            customerEntity.setThumbnail("/Public/Imgs/Avts/avatar7.png");
+            *//*if(customerId != null){
                 CustomerEntity customerFound = Optional.ofNullable(customerRepository.findOne(customerId))
                         .orElseThrow(() -> new NotFoundException("Customer not found"));
 
+                customerEntity.setThumbnail(customerFound.getThumbnail());
+                *//**//*if(!customerDTO.getThumbnail().equals(customerFound.getThumbnail())){
+                    customerEntity.setThumbnail(customerFound.getThumbnail());
+                }*//**//*
                 customerEntity.setUsers(customerFound.getUsers());
-            }
+
+            }*//*
             CustomerDTO savedCustomer  = customerConverter.convertToDto(customerRepository.save(customerEntity));
             return savedCustomer;
+        }*/
+        Long customerId = customerDTO.getId();
+        if(Objects.nonNull(customerDTO)){
+            if(customerId != null){
+                CustomerEntity customerEntity = customerConverter.convertToEntity(customerDTO);
+                CustomerEntity customerFound = Optional.ofNullable(customerRepository.findOne(customerId))
+                        .orElseThrow(() -> new NotFoundException("Customer not found"));
+
+                customerEntity.setThumbnail(customerFound.getThumbnail());
+                customerEntity.setUsers(customerFound.getUsers());
+                CustomerDTO savedCustomer  = customerConverter.convertToDto(customerRepository.save(customerEntity));
+                return savedCustomer;
+            }else{
+                CustomerEntity customerEntity = customerConverter.convertToEntity(customerDTO);
+                customerEntity.setThumbnail("/Public/Imgs/Avts/avatar7.png");
+                CustomerDTO savedCustomer  = customerConverter.convertToDto(customerRepository.save(customerEntity));
+                return savedCustomer;
+            }
         }
         return null;
     }
+
+    @Override
+    public CustomerDTO updateCustomerAvatar(CustomerDTO customerDTO) {
+        Long customerId = customerDTO.getId();
+        if(Objects.nonNull(customerDTO)){
+            if(customerId != null){
+                CustomerEntity customerEntity = customerConverter.convertToEntity(customerDTO);
+                CustomerEntity customerFound = Optional.ofNullable(customerRepository.findOne(customerId))
+                        .orElseThrow(() -> new NotFoundException("Customer not found"));
+                customerEntity.setUsers(customerFound.getUsers());
+                return customerConverter.convertToDto(customerRepository.save(customerEntity));
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public List<CustomerResponse> findByCondition(CustomerSearchRequest customerSearchRequest) throws IllegalAccessException {
@@ -123,9 +163,13 @@ public class CustomerService implements ICustomerService {
     @Transactional
     public void addTransaction(TransactionDTO transactionDTO) {
         Long customerId = transactionDTO.getCustomerId();
+        Long staffId = transactionDTO.getStaffId();
         if(Objects.nonNull(transactionDTO)){
             CustomerEntity customerEntity = Optional.ofNullable(customerRepository.findOne(customerId))
                     .orElseThrow(() -> new NotFoundException("Customer NOT FOUND!"));
+
+            UserEntity userEntity = Optional.ofNullable(userRepository.findOne(staffId))
+                    .orElseThrow(() -> new NotFoundException("Staff NOT FOUND!"));
 
             TransactionEntity transactionEntity = transactionConverter.convertToEntity(transactionDTO);
             transactionRepository.save(transactionEntity);

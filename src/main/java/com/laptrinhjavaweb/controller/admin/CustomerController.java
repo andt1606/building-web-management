@@ -2,6 +2,7 @@ package com.laptrinhjavaweb.controller.admin;
 
 import com.laptrinhjavaweb.constant.SystemConstant;
 import com.laptrinhjavaweb.dto.CustomerDTO;
+import com.laptrinhjavaweb.dto.request.AvatarRequest;
 import com.laptrinhjavaweb.dto.request.CustomerSearchRequest;
 import com.laptrinhjavaweb.dto.response.CustomerResponse;
 import com.laptrinhjavaweb.security.utils.SecurityUtils;
@@ -10,17 +11,21 @@ import com.laptrinhjavaweb.service.ITransactionService;
 import com.laptrinhjavaweb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.IOException;
 import java.util.List;
 
 @Controller(value = "customerControllerOfAdmin")
 public class CustomerController {
-
+    @Autowired
+    ServletContext servletContext;
     @Autowired
     private ICustomerService customerService;
 
@@ -67,4 +72,14 @@ public class CustomerController {
         mav.addObject("AllTransactionOfCustomer",transactionService.findAllTransaction(id));
         return mav;
     }
+
+ /*   @RequestMapping(value = "/admin/customer-update-avatar-{id}", method = RequestMethod.GET)
+    public ModelAndView updateAvatar(@PathVariable("customerId") long id, @RequestPart(value = "file") MultipartFile file,
+                                     HttpServletRequest request) throws ServletException, IOException {
+        ModelAndView mav = new ModelAndView("admin/customer/customer-edit");
+        mav.addObject("modelEdit", customerService.getCustomerById(id));
+        mav.addObject("transactions",transactionService.getTransactions(id));
+        mav.addObject("AllTransactionOfCustomer",transactionService.findAllTransaction(id));
+        return mav;
+    }*/
 }

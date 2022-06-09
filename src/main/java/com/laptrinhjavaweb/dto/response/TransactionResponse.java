@@ -9,6 +9,8 @@ public class TransactionResponse {
     private String note;
     private String createdDate;
 
+    private String staffName;
+
     public Long getId() {
         return id;
     }
@@ -47,5 +49,13 @@ public class TransactionResponse {
 
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
     }
 }

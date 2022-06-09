@@ -7,6 +7,9 @@
 <c:url var="buildingAPI" value="/api/building"/>
 <c:url var="buildingEditUrl" value="/admin/building-edit"/>
 <c:url var="buildingAssignmentAPI" value="/api/building-assignment"/>
+
+<%@ page import="com.laptrinhjavaweb.security.utils.SecurityUtils" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -92,11 +95,11 @@
 
                                         </div><!-- /form-group -->
 
-                                        <div class="form-group">
-                                            <div class="col-sm-4">
+                                        <div class="form-group" >
+                                            <div class="col-sm-4" >
                                                 <label for="district">Quận hiện có</label>
 
-                                                <form:select path="district">
+                                                <form:select cssClass="form-control" path="district">
                                                     <form:option value="" label="---Chọn quận---"/>
                                                     <form:options items="${districtmaps}"/>
                                                 </form:select>
@@ -237,84 +240,108 @@
 
                 </div><!-- /.row -->
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="pull-right">
-                            <a href="/admin/building-edit">
-                                <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm tòa nhà">
-                                    <i class="fa fa-plus-circle" aria-hidden="true" id="btn-add-building"></i>
-                                </button>
-                            </a>
 
-                            <button class="btn btn-white btn-warning btn-bold"
-                                    data-toggle="tooltip" title="Xóa tòa nhà" id="btnDeleteBuilding">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- button-add-delete -->
                 <br>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table id="buildingList" class="table table-striped table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Tên tòa nhà</th>
-                                <th>Địa chỉ</th>
-                                <th>Tên quản lý</th>
-                                <th>Số điện thoại</th>
-                                <th>Diện tích sàn</th>
-                                <th>Giá thuê</th>
-                                <th>Phí dịch vụ</th>
-                                <th>Phí môi giới</th>
-                                <th>Thao tác</th>
-                            </tr>
-                            </thead>
 
-                            <tbody>
-
-                            <c:forEach var="item" items="${buildings}">
-                                <tr>
-                                    <td class="center">
-                                        <label class="pos-rel">
-                                            <input type="checkbox" class="ace" value="${item.id}" id="checkboxListBuilding_${item.id}"/>
-                                        <span class="lbl"></span>
-                                        </label>
-
-                                    </td>
-                                    <td>${item.name}</td>
-                                    <td>${item.address}</td>
-                                    <td>${item.managerName}</td>
-                                    <td>${item.managerPhone}</td>
-                                    <td>${item.floorArea}</td>
-                                    <td>${item.rentPrice}</td>
-                                    <td>${item.serviceFee}</td>
-                                    <td>${item.brokerageFee}</td>
-                                    <td>
-                                        <button class="btn btn-xs btn-info" data-toggle="tooltip"
-                                                title="Giao tòa nhà" onclick="assignmentBuilding(${item.id})">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <a href="${buildingEditUrl}-${item.id}">
-                                            <button class="btn btn-xs btn-info" data-toggle="tooltip"
-                                                    title="Chỉnh sửa tòa nhà" >
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                        </a>
-                                    </td>
-
-                                </tr>
-                            </c:forEach>
-<%--onclick="editBuilding(${item.id})"--%>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
 
             </div><!-- /.page-content -->
+            <br>
+
+
+            <c:set var = "roleList" scope = "session" value = "<%=SecurityUtils.getPrincipal().getAuthorities()%>"/>
+
+
+            <c:forEach var="role" items="${roleList}">
+                <c:if test = "${role == 'ROLE_ADMIN'}">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="pull-right">
+                                <a href="/admin/building-edit">
+                                    <button class="btn btn-white btn-info btn-bold" data-toggle="tooltip" title="Thêm tòa nhà">
+                                        <i class="fa fa-plus-circle" aria-hidden="true" id="btn-add-building"></i>
+                                    </button>
+                                </a>
+
+                                <button class="btn btn-white btn-warning btn-bold"
+                                        data-toggle="tooltip" title="Xóa tòa nhà" id="btnDeleteBuilding">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+            </c:forEach>
+
+
+            <!-- button-add-delete -->
+            <br>
+            <div class="row">
+                <div class="col-xs-12">
+                    <table id="buildingList" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Tên tòa nhà</th>
+                            <th>Địa chỉ</th>
+                            <th>Tên quản lý</th>
+                            <th>Số điện thoại</th>
+                            <th>Diện tích sàn</th>
+                            <th>Giá thuê</th>
+                            <th>Phí dịch vụ</th>
+                            <th>Phí môi giới</th>
+                            <th>Thao tác</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <c:forEach var="item" items="${buildings}">
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" class="ace" value="${item.id}" id="checkboxListBuilding_${item.id}"/>
+                                        <span class="lbl"></span>
+                                    </label>
+
+                                </td>
+                                <td>${item.name}</td>
+                                <td>${item.address}</td>
+                                <td>${item.managerName}</td>
+                                <td>${item.managerPhone}</td>
+                                <td>${item.floorArea}</td>
+                                <td>${item.rentPrice}</td>
+                                <td>${item.serviceFee}</td>
+                                <td>${item.brokerageFee}</td>
+                                <td>
+
+
+                                    <c:set var = "roleList" scope = "session" value = "<%=SecurityUtils.getPrincipal().getAuthorities()%>"/>
+
+                                    <c:forEach var="role" items="${roleList}">
+                                        <c:if test = "${role == 'ROLE_ADMIN'}">
+                                            <button class="btn btn-xs btn-info" data-toggle="tooltip"
+                                                    title="Giao tòa nhà" onclick="assignmentBuilding(${item.id})">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                        </c:if>
+                                    </c:forEach>
+
+                                    <a href="${buildingEditUrl}-${item.id}">
+                                        <button class="btn btn-xs btn-info" data-toggle="tooltip"
+                                                title="Chỉnh sửa tòa nhà" >
+                                            <i class="fa fa-pencil"></i>
+                                        </button>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </c:forEach>
+                        <%--onclick="editBuilding(${item.id})"--%>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div><!-- /.main-content -->
 </div>
@@ -458,7 +485,7 @@
             success: function (data) {
                 //called when successful
                 console.log("success");
-
+                location.reload();
             },
             error: function (e) {
                 //called when there is an error

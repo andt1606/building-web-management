@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface ICustomerService {
     CustomerDTO saveCustomer(CustomerDTO customerDTO);
+    CustomerDTO updateCustomerAvatar(CustomerDTO customerDTO);
     List<CustomerResponse> findByCondition(CustomerSearchRequest customerSearchRequest)
             throws IllegalAccessException;
 
