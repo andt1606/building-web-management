@@ -1,5 +1,7 @@
 package com.laptrinhjavaweb.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public class BuildingDTO extends AbstractDTO<BuildingDTO>{
@@ -29,9 +31,19 @@ public class BuildingDTO extends AbstractDTO<BuildingDTO>{
     private String decorationTime;
     private String brokerageFee;
     private String note;
+
+    private String avatar;
     private String managerName;
     private String managerPhone;
     private List<String> buildingType;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getRentArea() {
         return rentArea;

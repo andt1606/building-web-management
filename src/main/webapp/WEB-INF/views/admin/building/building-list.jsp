@@ -32,14 +32,14 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">Dashboard</li>
+                <li class="active">Danh sách tòa nhà</li>
             </ul><!-- /.breadcrumb -->
 
         </div>
 
         <div class="page-content">
 
-            <div class="page-header">
+            <%--<div class="page-header">
                 <h1>
                     Dashboard
                     <small>
@@ -47,7 +47,7 @@
                         overview &amp; stats
                     </small>
                 </h1>
-            </div><!-- /.page-header -->
+            </div><!-- /.page-header -->--%>
 
 
             <div class="row">
@@ -183,13 +183,13 @@
 
                                             <div class="col-sm-4">
                                                 <div>
-                                                    <label for="managerName">Tên quản lý</label>
+                                                    <label for="managerName">Tên chủ tòa nhà</label>
                                                     <form:input path="managerName" cssClass="form-control"/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
                                                 <div>
-                                                    <label for="managerPhone">Điện thoại quản lý</label>
+                                                    <label for="managerPhone">Điện thoại </label>
                                                     <form:input path="managerPhone" cssClass="form-control"/>
                                                 </div>
                                             </div>
@@ -263,7 +263,7 @@
                                 </a>
 
                                 <button class="btn btn-white btn-warning btn-bold"
-                                        data-toggle="tooltip" title="Xóa tòa nhà" id="btnDeleteBuilding">
+                                        data-toggle="tooltip" title="Xóa tòa nhà" id="btnDeleteBuilding" onclick="warningBeforeDelete()">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -282,8 +282,9 @@
                         <tr>
                             <th></th>
                             <th>Tên tòa nhà</th>
+                            <th>Ảnh tòa nhà</th>
                             <th>Địa chỉ</th>
-                            <th>Tên quản lý</th>
+                            <th>Tên chủ tòa nhà</th>
                             <th>Số điện thoại</th>
                             <th>Diện tích sàn</th>
                             <th>Giá thuê</th>
@@ -305,6 +306,11 @@
 
                                 </td>
                                 <td>${item.name}</td>
+                                <td style="width: 80px;height: 80px">
+                                    <div >
+                                        <img class="img-responsive" src="${pageContext.request.contextPath}${item.avatar}" >
+                                    </div>
+                                </td>
                                 <td>${item.address}</td>
                                 <td>${item.managerName}</td>
                                 <td>${item.managerPhone}</td>
@@ -495,6 +501,7 @@
             }
         });
     }
+
 
     $('#btnDeleteBuilding').click(function (e) {
         e.preventDefault();

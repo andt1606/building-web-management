@@ -38,14 +38,14 @@
                     <i class="ace-icon fa fa-home home-icon"></i>
                     <a href="#">Home</a>
                 </li>
-                <li class="active">Dashboard</li>
+                <li class="active">Danh sách khách hàng</li>
             </ul><!-- /.breadcrumb -->
 
         </div>
 
         <div class="page-content">
 
-            <div class="page-header">
+            <%--<div class="page-header">
                 <h1>
                     Dashboard
                     <small>
@@ -53,7 +53,7 @@
                         overview &amp; stats
                     </small>
                 </h1>
-            </div><!-- /.page-header -->
+            </div><!-- /.page-header -->--%>
 
 
             <div class="row">

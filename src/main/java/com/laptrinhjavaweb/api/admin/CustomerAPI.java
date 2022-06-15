@@ -57,10 +57,10 @@ public class CustomerAPI {
     @PostMapping("/customer")
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO newCustomer) {
         CustomerDTO customerDTO = new CustomerDTO();
-        if (SecurityUtils.getAuthorities().contains(SystemConstant.ADMIN_ROLE)) {
-//            newCustomer.setThumbnail("/Public/Imgs/Avts/avatar7.png");
+        /*if (SecurityUtils.getAuthorities().contains(SystemConstant.ADMIN_ROLE)) {
             customerDTO = customerService.saveCustomer(newCustomer);
-        }
+        }*/
+        customerDTO = customerService.saveCustomer(newCustomer);
         return ResponseEntity.ok(customerDTO);
     }
 

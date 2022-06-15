@@ -1,6 +1,7 @@
 package com.laptrinhjavaweb.service;
 
 import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.dto.CustomerDTO;
 import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
 import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 
@@ -16,4 +17,6 @@ public interface IBuildingService {
     List<BuildingSearchResponse> findBuildingSearch(BuildingSearchRequest buildingSearchRequest);
     void deleteBuilding(List<Long> ids);
     BuildingDTO getBuldingById(long id);
+
+    BuildingDTO updateBuildingAvatar(BuildingDTO buildingDTO);
 }

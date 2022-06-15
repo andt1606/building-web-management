@@ -15,10 +15,19 @@ public class BuildingSearchResponse extends AbstractDTO<BuildingSearchResponse>{
     private Integer serviceFee;
     private Integer brokerageFee;*/
 
+    private String avatar;
     private String floorArea;
     private String rentPrice;
     private String serviceFee;
     private String brokerageFee;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getName() {
         return name;

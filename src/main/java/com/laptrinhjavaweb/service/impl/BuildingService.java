@@ -3,9 +3,11 @@ package com.laptrinhjavaweb.service.impl;
 import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.converter.BuildingConverter;
 import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.dto.CustomerDTO;
 import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
 import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 import com.laptrinhjavaweb.entity.BuildingEntity;
+import com.laptrinhjavaweb.entity.CustomerEntity;
 import com.laptrinhjavaweb.enums.BuildingTypesEnum;
 import com.laptrinhjavaweb.enums.DistrictsEnum;
 import com.laptrinhjavaweb.repository.BuildingRepository;
@@ -46,7 +48,7 @@ public class BuildingService implements IBuildingService {
     @Transactional
     public BuildingDTO saveBuilding(BuildingDTO buildingDTO) {
 
-        Long buildingId = buildingDTO.getId();
+        /*Long buildingId = buildingDTO.getId();
         if(Objects.nonNull(buildingDTO)){
             BuildingEntity buildingEntity = buildingConverter.convertToEntity(buildingDTO);
 
@@ -54,8 +56,8 @@ public class BuildingService implements IBuildingService {
                 BuildingEntity buildingFound = Optional.ofNullable(buildingRepository.findOne(buildingId))
                         .orElseThrow(() -> new NotFoundException("Building not found"));
 
-                /*buildingEntity.setCreatedBy(buildingFound.getCreatedBy());
-                buildingEntity.setCreatedDate(buildingFound.getCreatedDate());*/
+                buildingEntity.setCreatedBy(buildingFound.getCreatedBy());
+                buildingEntity.setCreatedDate(buildingFound.getCreatedDate());
                 buildingEntity.setUsers(buildingFound.getUsers());
 
                 rentareaRepository.deleteByBuildingId(buildingId);
@@ -63,8 +65,29 @@ public class BuildingService implements IBuildingService {
             BuildingDTO savedBuilding  = buildingConverter.convertToDto(buildingRepository.save(buildingEntity));
             return savedBuilding;
         }
-        return null;
+        return null;*/
 
+        Long buildingId = buildingDTO.getId();
+        if(Objects.nonNull(buildingDTO)){
+            if(buildingId != null){
+                BuildingEntity buildingEntity = buildingConverter.convertToEntity(buildingDTO);
+                BuildingEntity buildingFound = Optional.ofNullable(buildingRepository.findOne(buildingId))
+                        .orElseThrow(() -> new NotFoundException("Building not found"));
+                buildingEntity.setAvatar(buildingFound.getAvatar());
+                buildingEntity.setCreatedBy(buildingFound.getCreatedBy());
+                buildingEntity.setCreatedDate(buildingFound.getCreatedDate());
+                buildingEntity.setUsers(buildingFound.getUsers());
+                rentareaRepository.deleteByBuildingId(buildingId);
+                BuildingDTO savedBuilding  = buildingConverter.convertToDto(buildingRepository.save(buildingEntity));
+                return savedBuilding;
+            }else {
+                BuildingEntity buildingEntity = buildingConverter.convertToEntity(buildingDTO);
+                buildingEntity.setAvatar("/Public/Imgs/Buildings/defbuilding.png");
+                BuildingDTO savedBuilding  = buildingConverter.convertToDto(buildingRepository.save(buildingEntity));
+                return savedBuilding;
+            }
+        }
+        return null;
     }
 
 
@@ -148,6 +171,25 @@ public class BuildingService implements IBuildingService {
         BuildingEntity entity = buildingRepository.findById(id);
         BuildingDTO buildingDTO = buildingConverter.convertToDto(entity);
         return buildingDTO;
+    }
+
+    @Override
+    @Transactional
+    public BuildingDTO updateBuildingAvatar(BuildingDTO buildingDTO) {
+        Long buildingId = buildingDTO.getId();
+        if(Objects.nonNull(buildingDTO)){
+            if(buildingId != null){
+                BuildingEntity buildingEntity = buildingConverter.convertToEntity(buildingDTO);
+                BuildingEntity buildingFound = Optional.ofNullable(buildingRepository.findOne(buildingId))
+                        .orElseThrow(() -> new NotFoundException("Building not found"));
+                buildingEntity.setUsers(buildingFound.getUsers());
+                rentareaRepository.deleteByBuildingId(buildingId);
+
+                BuildingDTO savedBuilding  = buildingConverter.convertToDto(buildingRepository.save(buildingEntity));
+                return savedBuilding;
+            }
+        }
+        return null;
     }
 
 

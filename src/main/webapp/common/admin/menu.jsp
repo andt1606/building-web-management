@@ -40,7 +40,7 @@
         <li class="">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fas fa-users"></i>
-                <span class="menu-text">QL tòa nhà</span>
+                <span class="menu-text">QL bất động sản</span>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>

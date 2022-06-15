@@ -37,7 +37,7 @@ public class CustomerConverter {
         CustomerDTO result = modelMapper.map(entity, CustomerDTO.class);
         return result;
     }
-
+//    result.setType(String.join(",", dto.getBuildingType()));
     public CustomerResponse convertToResponse(CustomerEntity customerEntity) {
         CustomerResponse response = modelMapper.map(customerEntity, CustomerResponse.class);
         List<UserEntity> staffs = customerEntity.getUsers();
